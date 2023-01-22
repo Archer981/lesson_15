@@ -14,7 +14,13 @@ import prettytable
 
 con = sqlite3.connect("../music.db")
 cur = con.cursor()
-sqlite_query = ("")  # TODO составьте JOIN запрос здесь
+query = """select artists.name as name, genres.name as genre from artists
+        join albums on artists.id = albums.artist_id
+        join tracks on albums.id = tracks.album_id
+        join genres on tracks.genre_id = genres.id
+        group by artists.name, genres.name
+"""
+sqlite_query = query  # TODO составьте JOIN запрос здесь
 
 
 # Не удаляйте код ниже, он используется

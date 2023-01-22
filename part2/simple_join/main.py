@@ -8,7 +8,14 @@ import prettytable
 
 con = sqlite3.connect("../music.db")
 cur = con.cursor()
-sqlite_query = ("")  # TODO составьте запрос на создание таблицы
+query = """
+        select tracks.title, albums.album_title from albums
+        join artists on albums.artist_id = artists.id
+        join tracks on albums.id = tracks.album_id
+        where artists.name = 'Red Hot Chili Peppers'
+        limit 12
+"""
+sqlite_query = query  # TODO составьте запрос на создание таблицы
 
 
 # Не удаляйте код ниже, он используется
